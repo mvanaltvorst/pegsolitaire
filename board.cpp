@@ -31,10 +31,37 @@ void Board::setValue(Coord c, bool state) {
     matrix[c.y][c.x] = state;
 }
 
-// bool Board::checkMovePossible(Coord src, Direction d) {
-//     if (!insideField(src) || !insideField(dst)) return false;
-//     if (getValue(dst)) return false;
-// }
+bool Board::checkMovePossible(Coord src, Direction d) {
+    Coord middle;
+    Coord dst;
+
+    switch (d) {
+        case Direction::UP:
+            middle = src.delta(0, -1);
+            dst = src.delta(0, -2);
+            break;
+        case Direction::DOWN:
+            middle = src.delta(0, 1);
+            dst = src.delta(0, 2);
+            break;
+        case Direction::LEFT:
+            middle = src.delta(-1, 0);
+            dst = src.delta(-2, 0);
+            break;
+        case Direction::RIGHT:
+            middle = src.delta(1, 0);
+            dst = src.delta(2, 0);
+            break; 
+    }
+
+    if (!insideField(src) || 
+        !insideField(middle) || 
+        !insideField(dst) || 
+        !getValue(src) || 
+        !getValue(middle) ||
+        getValue(dst)) return false;
+    return true;
+}
 
 bool Board::insideField(Coord c) {
     return (c.x >= 0 && c.x < 7 || c.y >= 0 && c.y < 7 && (!((c.x < 2 || c.x > 4) && (c.y < 2 || c.y > 4))));

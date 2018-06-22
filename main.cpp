@@ -6,3 +6,7 @@ int main() {
     b.print();
     return 0;
 }
+
+void solveBoard(Board b) {
+    
+}
