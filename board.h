@@ -9,6 +9,11 @@ class Coord {
         Coord delta(int dx, int dy) { return Coord{x+dx, y+dy}; };
 };
 
+struct Move {
+    Coord src;
+    Direction direction;
+};
+
 class Board {
     private:
         bool matrix[7][7];
@@ -19,6 +24,8 @@ class Board {
         void setValue(Coord c, bool state);
         bool checkMovePossible(Coord src, Direction d);
         static bool insideField(Coord c);
+        void doMove(Move m);
+        int amountOfPegs();
 };
 
 #endif
