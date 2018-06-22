@@ -6,8 +6,9 @@ bool solveBoard(Board * b, Move history[32], int depth);
 int main() {
     Board b;
     Move history[31];
-    if (solveBoard(&b, history, 0)) std::cout << "Found solution" << std::endl;
+    solveBoard(&b, history, 0);
 
+    // Time to replay the solution
     b = Board();
     b.print();
     for (int i = 0; i < 31; i++) {
@@ -18,6 +19,7 @@ int main() {
     return 0;
 }
 
+// Backtracking solution
 bool solveBoard(Board * b, Move history[31], int depth) {
     if (b->amountOfPegs() == 1) {
         if (b->getValue(Coord{3, 3})) return true;
@@ -29,6 +31,7 @@ bool solveBoard(Board * b, Move history[31], int depth) {
             Coord c = Coord{x, y};
             Move m;
 
+            //TODO: make this cleaner
             if (b->checkMovePossible(c, Direction::UP)) {
                 m = Move{c, Direction::UP};
                 b->doMove(m);

@@ -8,7 +8,7 @@ Board::Board() {
         for (int y = 0; y < 7; y++) {
             setValue(Coord{x, y}, false);
             if (x==3 && y==3) continue; // middle
-            if(!insideField(Coord{x, y})) continue;
+            if(!insideField(Coord{x, y})) continue; // the 2x2 squares in the corners
             setValue(Coord{x, y}, true);
         }
     }
